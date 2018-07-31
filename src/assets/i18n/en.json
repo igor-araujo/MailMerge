@@ -1,7 +1,15 @@
 {
   "PAGES": {
       "HOME": {
-          "TITLE": "App works !"
+          "VIEW": "View Details",
+          "DOCUMENTS": "Documents",
+          "REGISTERS": "Registers",
+          "DATABASES": "Databases"
       }
+  },
+  "LANGUAGE": {
+      "ENGLISH": "English",
+      "PORTUGUESE": "Portuguese"
   }
+  
 }
