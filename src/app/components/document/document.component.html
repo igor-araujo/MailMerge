@@ -1,11 +1,14 @@
-<div class="container">
+<!-- show -->
+<div class="container" [hidden]="isShowDetails">
   <div class="row" style="margin-top: 5%;">
     <form class="form">
       <div class="col-md-1 col-sm-2 col-xs-3">
 
         <div class="form-group">
           <a class="btn btn-primary btn-circle btn-xl" routerLink="/">
-            <span style="vertical-align: -webkit-baseline-middle"><i class="fa fa-arrow-left"></i></span>
+            <span style="vertical-align: -webkit-baseline-middle">
+              <i class="fa fa-arrow-left"></i>
+            </span>
           </a>
         </div>
         <!-- div .col -->
@@ -24,8 +27,10 @@
       <!-- div .col -->
       <div class="col-md-1 col-sm-2 col-xs-3">
         <div class="form-group">
-          <a class="btn btn-success btn-circle btn-xl" href=#>
-              <span style="vertical-align: -webkit-baseline-middle"><i class="fa fa-plus"></i></span>
+          <a class="btn btn-success btn-circle btn-xl" (click)="showDetails(true)">
+            <span style="vertical-align: -webkit-baseline-middle">
+              <i class="fa fa-plus"></i>
+            </span>
           </a>
         </div>
       </div>
@@ -36,7 +41,9 @@
   <div class="row">
     <div class="col-md-4" style="margin-top: 2%">
       <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-file-text-o fa-5x"></i></div>
+        <div class="input-group-addon">
+          <i class="fa fa-file-text-o fa-5x"></i>
+        </div>
         <div class="panel panel-default">
           <div class="panel-body">
             Document Title
@@ -47,7 +54,9 @@
     <!-- div .col -->
     <div class="col-md-4" style="margin-top: 2%">
       <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-file-text-o fa-5x"></i></div>
+        <div class="input-group-addon">
+          <i class="fa fa-file-text-o fa-5x"></i>
+        </div>
         <div class="panel panel-default">
           <div class="panel-body">
             Document Title
@@ -58,7 +67,9 @@
     <!-- div .col -->
     <div class="col-md-4" style="margin-top: 2%">
       <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-file-text-o fa-5x"></i></div>
+        <div class="input-group-addon">
+          <i class="fa fa-file-text-o fa-5x"></i>
+        </div>
         <div class="panel panel-default">
           <div class="panel-body">
             Document Title
@@ -69,7 +80,9 @@
     <!-- div .col -->
     <div class="col-md-4" style="margin-top: 2%">
       <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-file-text-o fa-5x"></i></div>
+        <div class="input-group-addon">
+          <i class="fa fa-file-text-o fa-5x"></i>
+        </div>
         <div class="panel panel-default">
           <div class="panel-body">
             Document Title
@@ -80,7 +93,9 @@
     <!-- div .col -->
     <div class="col-md-4" style="margin-top: 2%">
       <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-file-text-o fa-5x"></i></div>
+        <div class="input-group-addon">
+          <i class="fa fa-file-text-o fa-5x"></i>
+        </div>
         <div class="panel panel-default">
           <div class="panel-body">
             Document Title
@@ -91,7 +106,9 @@
     <!-- div .col -->
     <div class="col-md-4" style="margin-top: 2%">
       <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-file-text-o fa-5x"></i></div>
+        <div class="input-group-addon">
+          <i class="fa fa-file-text-o fa-5x"></i>
+        </div>
         <div class="panel panel-default">
           <div class="panel-body">
             Document Title
@@ -102,7 +119,9 @@
     <!-- div .col -->
     <div class="col-md-4" style="margin-top: 2%">
       <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-file-text-o fa-5x"></i></div>
+        <div class="input-group-addon">
+          <i class="fa fa-file-text-o fa-5x"></i>
+        </div>
         <div class="panel panel-default">
           <div class="panel-body">
             Document Title
@@ -113,7 +132,9 @@
     <!-- div .col -->
     <div class="col-md-4" style="margin-top: 2%">
       <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-file-text-o fa-5x"></i></div>
+        <div class="input-group-addon">
+          <i class="fa fa-file-text-o fa-5x"></i>
+        </div>
         <div class="panel panel-default">
           <div class="panel-body">
             Document Title
@@ -124,7 +145,9 @@
     <!-- div .col -->
     <div class="col-md-4" style="margin-top: 2%">
       <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-file-text-o fa-5x"></i></div>
+        <div class="input-group-addon">
+          <i class="fa fa-file-text-o fa-5x"></i>
+        </div>
         <div class="panel panel-default">
           <div class="panel-body">
             Document Title
@@ -135,7 +158,9 @@
     <!-- div .col -->
     <div class="col-md-4" style="margin-top: 2%">
       <div class="input-group">
-        <div class="input-group-addon"><i class="fa fa-file-text-o fa-5x"></i></div>
+        <div class="input-group-addon">
+          <i class="fa fa-file-text-o fa-5x"></i>
+        </div>
         <div class="panel panel-default">
           <div class="panel-body">
             Document Title
@@ -147,25 +172,99 @@
   </div>
   <!-- div .row -->
   <div class="row text-center">
-      <nav aria-label="Page navigation">
-          <ul class="pagination pagination-lg">
-            <li class="disabled">
-              <a href="#" aria-label="Previous" >
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="active"><a href="#" >1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-              <a href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+    <nav aria-label="Page navigation">
+      <ul class="pagination pagination-lg">
+        <li class="disabled">
+          <a href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="#">1</a>
+        </li>
+        <li>
+          <a href="#">2</a>
+        </li>
+        <li>
+          <a href="#">3</a>
+        </li>
+        <li>
+          <a href="#">4</a>
+        </li>
+        <li>
+          <a href="#">5</a>
+        </li>
+        <li>
+          <a href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </div>
 <!-- div .container -->
+<!-- end show -->
+
+<!-- edit -->
+<div class="container" [hidden]="!isShowDetails">
+  <!-- Menu -->
+  <div class="row" style="margin-top: 5%;">
+    <form class="form">
+      <div class="col-md-1 col-sm-2 col-xs-3" [hidden]="isEditable">
+        <div class="form-group">
+          <a class="btn btn-primary btn-circle btn-xl" (click)="showDetails(false)">
+            <span style="vertical-align: -webkit-baseline-middle">
+              <i class="fa fa-arrow-left"></i>
+            </span>
+          </a>
+        </div>
+        <!-- div .col -->
+      </div>
+      <div class="col-md-1 col-sm-2 col-xs-3" [hidden]="!isEditable">
+        <div class="form-group">
+          <a class="btn btn-danger btn-circle btn-xl" (click)="closeDocument()">
+            <span style="vertical-align: -webkit-baseline-middle">
+              <i class="fa fa-times"></i>
+            </span>
+          </a>
+        </div>
+        <!-- div .col -->
+      </div>
+
+      <div class="col-md-1 col-sm-2 col-xs-3 pull-right" [hidden]="isEditable">
+        <div class="form-group">
+          <a class="btn btn-success btn-circle btn-xl" (click)="setEditable()">
+            <span style="vertical-align: -webkit-baseline-middle">
+              <i class="fa fa-pencil"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- div .col -->
+      <div class="col-md-1 col-sm-2 col-xs-3 pull-right" [hidden]="!isEditable">
+        <div class="form-group">
+          <a class="btn btn-success btn-circle btn-xl" (click)="saveDocument()">
+            <span style="vertical-align: -webkit-baseline-middle">
+              <i class="fa fa-check"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+      <!-- div .col -->
+    </form>
+  </div>
+  <!-- End Menu -->
+
+  <!-- Document File -->
+  <div data-editable data-name="main-content">
+      <blockquote>
+          Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live.
+      </blockquote>
+      <p>John F. Woods</p>
+  </div>
+  <!-- End Document File -->
+</div>
+<!-- div .container -->
+<!-- end edit -->
