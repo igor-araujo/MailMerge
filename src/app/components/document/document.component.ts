@@ -16,9 +16,8 @@ export class DocumentComponent implements OnInit {
   private editor: any;
   private fs;
 
-  constructor(public electronService: ElectronService) { 
-    this.fs = this.electronService.remote.require('fs');
-    console.log(this.fs);
+  constructor(public electronService: ElectronService) {
+
   }
 
   ngOnInit() {
@@ -26,7 +25,7 @@ export class DocumentComponent implements OnInit {
     this.isEditable = false;
     ContentTools.IMAGE_UPLOADER = this.imageUploader;
     this.editor = ContentTools.EditorApp.get();
-    this.editor.init('*[data-editable]', 'main-content', null, false);
+    this.editor.init('[data-editable]', 'main-content', null, false);
   }
 
   showDetails(show: boolean) {
@@ -80,183 +79,79 @@ export class DocumentComponent implements OnInit {
       // Upload a file to the server
       var formData;
       var file = ev.detail().file;
-      // Define functions to handle upload progress and completion
-      xhrProgress = function (ev) {
-        // Set the progress for the upload
-        dialog.progress((ev.loaded / ev.total) * 100);
-      }
-
-      xhrComplete = function (ev) {
-        var response;
-
-        // Check the request is complete
-        if (ev.target.readyState != 4) {
-          return;
-        }
-
-        // Clear the request
-        xhr = null
-        xhrProgress = null
-        xhrComplete = null
-
-        // Handle the result of the upload
-        if (parseInt(ev.target.status) == 200) {
-          // Unpack the response (from JSON)
-          response = JSON.parse(ev.target.responseText);
-
-          // Store the image details
-          image = {
-            size: response.size,
-            url: response.url
-          };
-
-          // Populate the dialog
-          dialog.populate(image.url, image.size);
-
-        } else {
-          // The request failed, notify the user
-          new ContentTools.FlashUI('no');
-        }
-      }
+      console.log(file);
 
       // Set the dialog state to uploading and reset the progress bar to 0
       dialog.state('uploading');
       dialog.progress(0);
 
-      // Build the form data to post to the server
-      formData = new FormData();
-      formData.append('image', file);
+      const fs = window.require('fs');
+      const sizeOf = require('image-size');
 
-      // Make the request
-      xhr = new XMLHttpRequest();
-      xhr.upload.addEventListener('progress', xhrProgress);
-      xhr.addEventListener('readystatechange', xhrComplete);
-      xhr.open('POST', '/upload-image', true);
-      xhr.send(formData);
+      var dimensions = sizeOf(file.path);
+      var img = fs.readFileSync(file.path);
+      var base64 = new Buffer(img).toString('base64');
+      image = {url:"data:" + file.type + ";base64," + base64, size:[dimensions.width, dimensions.height], name: file.name};
+      dialog.populate(image.url, image.size);
     });
 
     function rotateImage(direction) {
-      // Request a rotated version of the image from the server
-      var formData;
-
-      // Define a function to handle the request completion
-      xhrComplete = function (ev) {
-        var response;
-
-        // Check the request is complete
-        if (ev.target.readyState != 4) {
-          return;
-        }
-
-        // Clear the request
-        xhr = null
-        xhrComplete = null
-
-        // Free the dialog from its busy state
-        dialog.busy(false);
-
-        // Handle the result of the rotation
-        if (parseInt(ev.target.status) == 200) {
-          // Unpack the response (from JSON)
-          response = JSON.parse(ev.target.responseText);
-
-          // Store the image details (use fake param to force refresh)
-          image = {
-            size: response.size,
-            url: response.url + '?_ignore=' + Date.now()
-          };
-
-          // Populate the dialog
-          dialog.populate(image.url, image.size);
-
-        } else {
-          // The request failed, notify the user
-          new ContentTools.FlashUI('no');
-        }
-      }
-
+      
       // Set the dialog to busy while the rotate is performed
       dialog.busy(true);
 
-      // Build the form data to post to the server
-      formData = new FormData();
-      formData.append('url', image.url);
-      formData.append('direction', direction);
+      var tnCanvas = document.createElement('canvas');
+      var tnCanvasContext = tnCanvas.getContext('2d');
+      var imageTmp = new Image;
+      imageTmp.src = image.url;
 
-      // Make the request
-      xhr = new XMLHttpRequest();
-      xhr.addEventListener('readystatechange', xhrComplete);
-      xhr.open('POST', '/rotate-image', true);
-      xhr.send(formData);
+      tnCanvas.width = imageTmp.height;
+      tnCanvas.height = imageTmp.width;
+
+      tnCanvasContext.clearRect(0, 0, tnCanvas.width, tnCanvas.height);
+      tnCanvasContext.translate(imageTmp.height/2,imageTmp.width/2);
+      tnCanvasContext.rotate(direction*Math.PI/180);
+      tnCanvasContext.drawImage(imageTmp,-imageTmp.width/2,-imageTmp.height/2);
+
+      image.url = tnCanvas.toDataURL();
+      image.size = [tnCanvas.width, tnCanvas.height];
+      // Populate the dialog
+      dialog.populate(image.url, image.size);
+
+      // Free the dialog from its busy state
+      dialog.busy(false);
     }
 
     dialog.addEventListener('imageuploader.rotateccw', function () {
-      rotateImage('CCW');
+      rotateImage(270);
     });
 
     dialog.addEventListener('imageuploader.rotatecw', function () {
-      rotateImage('CW');
+      rotateImage(90);
     });
 
     dialog.addEventListener('imageuploader.save', function () {
       var crop, cropRegion, formData;
 
-      // Define a function to handle the request completion
-      xhrComplete = function (ev) {
-        // Check the request is complete
-        if (ev.target.readyState !== 4) {
-          return;
-        }
-
-        // Clear the request
-        xhr = null
-        xhrComplete = null
-
-        // Free the dialog from its busy state
-        dialog.busy(false);
-
-        // Handle the result of the rotation
-        if (parseInt(ev.target.status) === 200) {
-          // Unpack the response (from JSON)
-          var response = JSON.parse(ev.target.responseText);
-
-          // Trigger the save event against the dialog with details of the
-          // image to be inserted.
-          dialog.save(
-            response.url,
-            response.size,
-            {
-              'alt': response.alt,
-              'data-ce-max-width': response.size[0]
-            });
-
-        } else {
-          // The request failed, notify the user
-          new ContentTools.FlashUI('no');
-        }
-      }
-
       // Set the dialog to busy while the rotate is performed
       dialog.busy(true);
-
-      // Build the form data to post to the server
-      formData = new FormData();
-      formData.append('url', image.url);
-
-      // Set the width of the image when it's inserted, this is a default
-      // the user will be able to resize the image afterwards.
-      formData.append('width', 600);
-
+      
       // Check if a crop region has been defined by the user
       if (dialog.cropRegion()) {
-        formData.append('crop', dialog.cropRegion());
+        console.log(dialog.cropRegion());
       }
+      
+      dialog.save(
+        image.url,
+        image.size,
+        {
+          'alt': image.name,
+          'data-ce-max-width': image.size[0]
+        });
+      // Free the dialog from its busy state
+      dialog.busy(false);
 
-      // Make the request
-      xhr = new XMLHttpRequest();
-      xhr.addEventListener('readystatechange', xhrComplete);
-      xhr.open('POST', '/insert-image', true);
-      xhr.send(formData);
+
     });
 
   }

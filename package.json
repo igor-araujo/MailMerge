@@ -37,7 +37,8 @@
     "e2e": "npm run postinstall:web && ng e2e"
   },
   "dependencies": {
-    "ContentTools": "^1.6.9"
+    "ContentTools": "^1.6.9",
+    "image-size": "^0.6.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.6.3",
