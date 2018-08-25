@@ -24,6 +24,20 @@ export class DocumentComponent implements OnInit {
     this.isShowDetails = false;
     this.isEditable = false;
     ContentTools.IMAGE_UPLOADER = this.imageUploader;
+    ContentTools.StylePalette.add([
+      new ContentTools.Style('title-table','title-table',['th']),
+      new ContentTools.Style('cell-table','cell-table',['td','tr','tbody']),
+      new ContentTools.Style('text-justify','text-justify',['p','td']),
+      new ContentTools.Style('Arial-XX-Small','arial-xx-small',['td','th','p']),
+      new ContentTools.Style('Arial-X-Small','arial-x-small',['td','th','p']),
+      new ContentTools.Style('Arial-Smaller','arial-smaller',['td','th','p']),
+      new ContentTools.Style('Arial-Small','arial-small',['td','th','p']),
+      new ContentTools.Style('Arial-Medium','arial-medium',['td','th','p']),
+      new ContentTools.Style('Arial-Large','arial-large',['td','th','p']),
+      new ContentTools.Style('Arial-Larger','arial-larger',['td','th','p']),
+      new ContentTools.Style('Arial-X-Larger','arial-x-larger',['td','th','p']),
+      new ContentTools.Style('Arial-XX-Larger','arial-xx-larger',['td','th','p'])
+    ])
     this.editor = ContentTools.EditorApp.get();
     this.editor.init('[data-editable]', 'main-content', null, false);
   }

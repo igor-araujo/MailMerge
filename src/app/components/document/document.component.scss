@@ -11,3 +11,67 @@ div.panel{
 span.input-group-btn button{
     height: 66px
 }
+
+.pageA4{
+    height:297mm;
+    width:210mm;
+    margin:auto;
+}
+
+.title-table{
+    border-style: solid;
+    border-width: thin;
+    background-color: lightgreen;
+}
+
+.cell-table{
+    border-style: solid;
+    border-width: thin;
+}
+
+.text-justify{
+    text-align: justify;
+}
+
+.arial-xx-small{
+    font-family: Arial;
+    font-size: xx-small;
+}
+
+.arial-x-small{
+    font-family: Arial;
+    font-size: x-small;
+}
+
+.arial-smaller{
+    font-family: Arial;
+    font-size: smaller;
+}
+
+.arial-small{
+    font-family: Arial;
+    font-size: small;
+}
+
+.arial-medium{
+    font-family: Arial;
+    font-size: medium;
+}
+
+.arial-large{
+    font-family: Arial;
+    font-size: large;
+}
+
+.arial-larger{
+    font-family: Arial;
+    font-size: larger;
+}
+.arial-x-large{
+    font-family: Arial;
+    font-size: x-large;
+}
+.arial-xx-large{
+    font-family: Arial;
+    font-size: xx-large;
+}
